@@ -52,165 +52,165 @@ class _CurrencyExchangeState extends State<CurrencyExchange> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Exchange Rates', style: TextStyle(color: Colors.white, fontSize: 24),),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color: Colors.grey.shade800,
-              height: MediaQuery.of(context).size.height * 0.71,
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start ,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  Text('1 $convertFrom', textAlign: TextAlign.center, style: TextStyle(
-                    color: Colors.orange, fontSize: 64,
-                  ),),
-                  Text('=',textAlign: TextAlign.center, style: TextStyle(
-                    color: Colors.orange, fontSize: 64,
-                  ),),
-                  Text('$result  $convertTo', textAlign: TextAlign.center, style: TextStyle(
-                    color: Colors.orange, fontSize: 64,
-                  ),),
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('From',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                            fontSize: 32,color: Colors.black
-                          ),
-                          ),
-                        ),
-                        //covert from selected currency
-                        DecoratedBox(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(7.0),
-                              border: Border.all(color: Colors.blueGrey)),
-                          child: Container(
-                            width: 120,
-                            height: 60,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                              child: DropdownButton(
-                                elevation: 5,
-                                onChanged: (selectedCurrency) {
-                                  convertFrom = selectedCurrency;
-                                  fetchLatestDataMap();
-                                  print('from $selectedCurrency');
-                                  result = (latestDataMap['rates'][convertTo] /
-                                          latestDataMap['rates'][convertFrom])
-                                      .toStringAsFixed(2);
-                                  setState(() {});
-                                },
-                                items: currencyList
-                                    .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                value: convertFrom,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text('To',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 32,color: Colors.black
-                            ),),
-                        ),
-                        //covert to  selected currency
-                        DecoratedBox(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7.0),
-                      border: Border.all(color: Colors.blueGrey)),
-                          child: Container(
-                            width: 120,
-                            height: 60,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Platform.isAndroid ? DropdownButton(
-                                elevation: 5,
-                                onChanged: (selectedCurrency) {
-                                  convertTo = selectedCurrency;
-                                  print('to $selectedCurrency');
-                                  result = (latestDataMap['rates'][convertTo] /
-                                      latestDataMap['rates'][convertFrom])
-                                      .toStringAsFixed(2);
-                                  setState(() {});
-                                },
-                                items: currencyList
-                                    .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                value: convertTo,
-                              ) :
-                              CupertinoPicker(
-                                magnification: 1.5,
-                                backgroundColor: Colors.black87,
-                                children: <Widget>[
-                                  Text(
-                                    "TextWidget",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                ],
-                                itemExtent: 50, //height of each item
-                                looping: true,
-                                onSelectedItemChanged: (selectedCurrency) {
-                                  convertTo = '$selectedCurrency';
-                                  print('to $selectedCurrency');
-                                  result = (latestDataMap['rates'][convertTo] /
-                                      latestDataMap['rates'][convertFrom])
-                                      .toStringAsFixed(2);
-                                  setState(() {});
-                                },
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
+        title: Text(
+          'Exchange Rates',
+          style: TextStyle(color: Colors.white, fontSize: 24),
         ),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            color: Colors.grey.shade800,
+            height: MediaQuery.of(context).size.height * 0.71,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                ),
+                Text(
+                  '1 $convertFrom',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 64,
+                  ),
+                ),
+                Text(
+                  '=',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 64,
+                  ),
+                ),
+                Text(
+                  '$result  $convertTo',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.orange,
+                    fontSize: 64,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height * 0.29,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[                          //covert from
+                        Icon(Icons.keyboard_arrow_up,),
+                        Container(
+                          child: !Platform.isAndroid ? DropdownButton(
+                            isExpanded: true,
+                            elevation: 5,
+                            onChanged: (selectedCurrency) {
+                              convertFrom = selectedCurrency;
+                              result = (latestDataMap['rates'][convertTo] /
+                                  latestDataMap['rates'][convertFrom])
+                                  .toStringAsFixed(2);
+                              setState(() {});
+                            },
+                            items: currencyList.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text("            $value  "),
+                              );
+                            }).toList(),
+                            value: convertFrom,
+                          ) :
+                          CupertinoPicker.builder(
+                            itemExtent: 40,
+                            childCount: currencyList.length,
+                            itemBuilder: (context, index) {
+                              print("index in IOS picker is $index");
+                              return Text(currencyList[index]);
+                            },
+                            onSelectedItemChanged: (index) {
+                              convertFrom = currencyList[index];
+                              result = (latestDataMap['rates'][convertTo] /
+                                  latestDataMap['rates'][convertFrom])
+                                  .toStringAsFixed(2);
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        Icon(Icons.keyboard_arrow_down)
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        //covert to
+                        Icon(Icons.keyboard_arrow_up,),
+                        Container(
+                          height: 75,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Platform.isAndroid
+                                ? DropdownButton(
+                              isExpanded: true,
+                              elevation: 5,
+                              onChanged: (selectedCurrency) {
+                                convertFrom = selectedCurrency;
+                                result = (latestDataMap['rates'][convertTo] /
+                                    latestDataMap['rates'][convertFrom])
+                                    .toStringAsFixed(2);
+                                setState(() {});
+                              },
+                              items: currencyList.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text("            $value  "),
+                                );
+                              }).toList(),
+                              value: convertTo,
+                            )
+                                : CupertinoPicker.builder(
+                                    itemExtent: 40,
+                                    childCount: currencyList.length,
+                                    itemBuilder: (context, index) {
+                                      print("index in IOS picker is $index");
+                                      return Text(currencyList[index]);
+                                    },
+                                    onSelectedItemChanged: (index) {
+                                      convertTo = currencyList[index];
+                                      result = (latestDataMap['rates']
+                                                  [convertTo] /
+                                              latestDataMap['rates']
+                                                  [convertFrom])
+                                          .toStringAsFixed(2);
+                                      setState(() {});
+                                    },
+                                  ),
+                          ),
+                        ),
+                        Icon(Icons.keyboard_arrow_down)
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
